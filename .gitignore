@@ -1,0 +1,14 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/JeuHoyEtudiants/.vs
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/.vs
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug/JeuHoy_WPF_Natif.exe
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug/JeuHoy_WPF_Natif.exe.config
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug/JeuHoy_WPF_Natif.pdb
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug/Microsoft.Kinect.dll
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug/Microsoft.Kinect.xml
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/bin/Debug
+/JeuHoyEtudiants/JeuHoy_WPF_Natif/obj
