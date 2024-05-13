@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Kinect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace JeuHoy_WPF_Natif.Modele
     /// </summary>
     public class GestionPerceptron : IGestionPerceptron
     {
+
+        Dictionary<int, List<double>> trainingData = new Dictionary<int, List<double>>();
         /// <summary>
         /// Permet de charger les résultats d'apprentissage
         /// </summary>
@@ -32,6 +35,21 @@ namespace JeuHoy_WPF_Natif.Modele
         /// </summary>
         public void Sauvegarder()
         {
+        }
+
+        public Dictionary<int, List<double>> CollectTrainingData(Joint[] joints,int position)
+        {
+            List<double> data = new List<double>();
+
+            foreach (Joint joint in joints)
+            {
+                data.Add(joint.Position.X);
+                data.Add(joint.Position.Y);
+            }
+
+            trainingData.Add(position, data);
+
+            return trainingData;
         }
     }
 }

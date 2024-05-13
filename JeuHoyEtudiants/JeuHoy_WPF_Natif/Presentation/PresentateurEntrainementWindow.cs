@@ -31,24 +31,11 @@ namespace JeuHoy_WPF_Natif.Presentation
 
         private void Apprentissage(object sender, EventArgs e)
         {
-            CollectTrainingData(_vue.aJoints);
+            _gestionPerceptron.CollectTrainingData(_vue.aJoints, _vue.PositionEnCour);
 
             _gestionPerceptron.Entrainement(trainingData);
         }
 
-        public Dictionary<int, List<double>> CollectTrainingData(Joint[] joints)
-        {
-            List<double> data = new List<double>();
-
-            foreach (Joint joint in joints)
-            {
-                data.Add(joint.Position.X);
-                data.Add(joint.Position.Y);
-            }
-
-            trainingData.Add(_vue.PositionEnCour, data);
-
-            return trainingData;
-        }
+        
     }
 }

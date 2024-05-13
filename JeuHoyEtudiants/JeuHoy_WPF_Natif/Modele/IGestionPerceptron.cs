@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Kinect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace JeuHoy_WPF_Natif.Modele
         void Sauvegarder();
         void Charger();
         void Entrainement(Dictionary<int, List<double>> trainingData);
+        Dictionary<int, List<double>> CollectTrainingData(Joint[] joints, int position);
     }
 }
