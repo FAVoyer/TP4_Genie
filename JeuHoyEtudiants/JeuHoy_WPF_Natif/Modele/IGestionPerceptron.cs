@@ -10,6 +10,6 @@ namespace JeuHoy_WPF_Natif.Modele
     {
         void Sauvegarder();
         void Charger();
-        void Entrainement();
+        void Entrainement(Dictionary<int, List<double>> trainingData);
     }
 }

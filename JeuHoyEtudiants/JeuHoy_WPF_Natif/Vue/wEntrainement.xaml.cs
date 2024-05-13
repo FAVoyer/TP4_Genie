@@ -1,4 +1,5 @@
-﻿using JeuHoy_WPF_Natif.Vue;
+﻿using JeuHoy_WPF_Natif.Presentation;
+using JeuHoy_WPF_Natif.Vue;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,22 @@ namespace JeuHoy_WPF
 
         private ushort[] _picFrameData = null;
         private byte[] _picPixels = null;
+
+        private PresentateurEntrainementWindow _presentateur;
         #endregion
 
         #region Events
         public event RoutedEventHandler ChangerFigure;
-        public event RoutedEventHandler Apprendre;
+        public event EventHandler Apprendre;
         #endregion
 
+        #region Propriete
+        public Joint[] aJoints { get; set; }
+
+
+        public int PositionEnCour { get { return _positionEnCours; } }
+
+        #endregion
 
         /// <summary>
         /// Constructeur
@@ -61,6 +71,7 @@ namespace JeuHoy_WPF
         {
             InitializeComponent();
             _kinectSensor = KinectSensor.GetDefault();
+            _presentateur = new PresentateurEntrainementWindow(this);
 
             if (_kinectSensor != null)
             {
@@ -88,6 +99,11 @@ namespace JeuHoy_WPF
             _son.JouerSonAsync(@"./HoyContent/hoy.wav");
         }
 
+        public void GetJoitsPos(Body body)
+        {
+            aJoints = body.Joints.Values.ToArray();
+        }
+
         /// <summary>
         /// Permet de dessiner le squelette de l'utilisateur
         /// Date: 2024-05-12
@@ -107,9 +123,9 @@ namespace JeuHoy_WPF
                     bodyFrame.GetAndRefreshBodyData(bodies);
                     foreach (Body body in bodies.Where(b => b.IsTracked))
                     {
-
                         if (body != null)
                         {
+                            GetJoitsPos(body);
                             DessinerSquelette(body, _kinectSensor);
                         }
                     }
@@ -362,7 +378,7 @@ namespace JeuHoy_WPF
         /// <param name="e"></param>
         public void btnApprendre_Click(object sender, RoutedEventArgs e)
         {
-            this.Apprendre(this, (RoutedEventArgs)EventArgs.Empty);
+            Apprendre(this, EventArgs.Empty);
         }
     }
 }

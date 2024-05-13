@@ -39,7 +39,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="btnSuivant" Grid.Column="0" Grid.Row="0" Content="Suivant" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="85" Click="btnClickChangerFigure_Click"/>
             <Button x:Name="btnPrecedent" Grid.Column="1" Grid.Row="0" Content="Précédent" HorizontalAlignment="Center" Width="85" Click="btnClickChangerFigure_Click" Margin="0,0,0,7"/>
-            <Button x:Name="btnApprendre" Grid.Column="2" Grid.Row="0" Content="Apprendre" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="38" Width="85" Click="btnApprendre_Click"/>
+            <Button x:Name="btnApprendre" Grid.Column="2" Grid.Row="0" Content="Apprendre" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="38" Width="85" Click="btnApprendre_Click" Margin="41,-288,0,0"/>
             <Image x:Name="imgRetour" Grid.Column="0" Grid.Row="1" Source="/edit_undo.png" MouseEnter="picRetour_MouseHover" MouseLeave="picRetour_MouseLeave" MouseLeftButtonDown="picRetour_Click"/>
 
             <Label x:Name="lblFigureEnCours" Grid.Column="1" Grid.Row="1"  Content="1" HorizontalAlignment="Right" VerticalAlignment="Top"  FontFamily="Matura MT Script Capitals" FontSize="50"  />

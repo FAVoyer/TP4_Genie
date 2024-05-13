@@ -10,6 +10,11 @@ namespace JeuHoy_WPF_Natif.Vue
 {
     public interface IEntrainement
     {
+        Joint[] aJoints { get; set; }
+
+        int PositionEnCour { get; }
+
+
         // Méthode pour charger la figure de danse en cours
         void ChargerFigure();
 
@@ -38,6 +43,6 @@ namespace JeuHoy_WPF_Natif.Vue
         event RoutedEventHandler ChangerFigure;
 
         // Méthode pour apprendre avec la position obtenue à partir de la Kinect versus l'image affichée
-        event RoutedEventHandler Apprendre;
+        event EventHandler Apprendre;
     }
 }

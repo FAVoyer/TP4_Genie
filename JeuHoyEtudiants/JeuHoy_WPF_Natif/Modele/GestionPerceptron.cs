@@ -23,7 +23,7 @@ namespace JeuHoy_WPF_Natif.Modele
         /// <summary>
         /// Permet d'entrainer le perceptron
         /// </summary>
-        public void Entrainement()
+        public void Entrainement(Dictionary<int, List<double>> trainingData)
         {
         }
 
