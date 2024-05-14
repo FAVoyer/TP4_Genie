@@ -19,16 +19,29 @@ namespace JeuHoy_WPF_Natif.Modele
         private double learningRate = 0.1;
         private int epochs = 1000;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="inputSize"></param>
         public Perceptron(int inputSize)
         {
-            Random rand = new Random();
-            _poidsSyn = new double[inputSize + 1];
-            for (int i = 0; i < _poidsSyn.Length; i++)
+            Charger("test.txt", inputSize);
+
+            if (_poidsSyn == null)
             {
-                _poidsSyn[i] = rand.NextDouble() * 2 - 1;
+                Random rand = new Random();
+                _poidsSyn = new double[inputSize + 1];
+                for (int i = 0; i < _poidsSyn.Length; i++)
+                {
+                    _poidsSyn[i] = rand.NextDouble() * 2 - 1;
+                }
             }
         }
 
+        /// <summary>
+        /// Permet d'entrainer un perceptron
+        /// </summary>
+        /// <param name="trainingData"></param>
         public void Entrainement(Dictionary<int, List<double>> trainingData)
         {
             for (int epoch = 0; epoch < epochs; epoch++)
@@ -58,8 +71,14 @@ namespace JeuHoy_WPF_Natif.Modele
                     }
                 }
             }
+
+            Sauvegarder("test.txt");
         }
 
+        /// <summary>
+        /// Permet de sauvegarder les statistiques d'apprentissage
+        /// </summary>
+        /// <param name="filePath"></param>
         public void Sauvegarder(string filePath)
         {
             using (StreamWriter writer = new StreamWriter(filePath))
@@ -71,13 +90,18 @@ namespace JeuHoy_WPF_Natif.Modele
             }
         }
 
-        public void Charger(string filePath)
+        /// <summary>
+        /// Permet de charger les statistiques d'apprentissage
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="inputSize"></param>
+        public void Charger(string filePath, int inputSize)
         {
             try
             {
                 string[] lines = File.ReadAllLines(filePath);
 
-                if (lines.Length == _poidsSyn.Length)
+                if (lines.Length == inputSize + 1)
                 {
                     for (int i = 0; i < _poidsSyn.Length; i++)
                     {
@@ -91,6 +115,11 @@ namespace JeuHoy_WPF_Natif.Modele
             }
         }
 
+        /// <summary>
+        /// Permet de prédire le mouvement de l'utilisateur
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public int Prediction(List<double> input)
         {
             List<double> inputWithBias = new List<double>(input);

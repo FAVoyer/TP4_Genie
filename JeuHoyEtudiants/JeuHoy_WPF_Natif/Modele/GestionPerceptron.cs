@@ -16,17 +16,10 @@ namespace JeuHoy_WPF_Natif.Modele
     /// </summary>
     public class GestionPerceptron : IGestionPerceptron
     {
+        //Variables locales
         Dictionary<int, List<double>> trainingData = new Dictionary<int, List<double>>();
         Dictionary<int, Perceptron> perceptrons = new Dictionary<int, Perceptron>();
-        Perceptron _perceptron = new Perceptron();
 
-        /// <summary>
-        /// Permet de charger les résultats d'apprentissage
-        /// </summary>
-        public void Charger()
-        {
-            _perceptron.Charger("test.txt");
-        }
 
         /// <summary>
         /// Permet d'entrainer le perceptron
@@ -49,13 +42,10 @@ namespace JeuHoy_WPF_Natif.Modele
         }
 
         /// <summary>
-        /// Permet de sauvegarder les données d'apprentissage
+        /// Permet de prédire le mouvement de l'utilisateur
         /// </summary>
-        public void Sauvegarder()
-        {
-            _perceptron.Sauvegarder("test.txt");
-        }
-
+        /// <param name="target"></param>
+        /// <returns></returns>
         public int Prediction(int target)
         {
             List<double> input = trainingData[target];

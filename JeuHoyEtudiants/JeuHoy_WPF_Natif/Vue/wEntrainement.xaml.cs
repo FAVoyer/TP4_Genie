@@ -121,6 +121,11 @@ namespace JeuHoy_WPF
             _recognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
 
+        /// <summary>
+        /// Permet de reconnaitre la voix lorsque l'on crie HOY
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             if (e.Result.Text == "HOY!")
@@ -130,6 +135,10 @@ namespace JeuHoy_WPF
             }
         }
 
+        /// <summary>
+        /// Permet d'aller chercher les positions des joints dans l'écran
+        /// </summary>
+        /// <param name="body"></param>
         public void GetJoitsPos(Body body)
         {
             aJoints = body.Joints.Values.ToArray();

@@ -18,9 +18,14 @@ namespace JeuHoy_WPF_Natif.Presentation
     /// </summary>
     public class PresentateurEntrainementWindow
     {
+        //Variables globales
         private IEntrainement _vue;
         private GestionPerceptron _gestionPerceptron;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="vue"></param>
         public PresentateurEntrainementWindow(IEntrainement vue)
         {
             _vue = vue;
@@ -28,6 +33,11 @@ namespace JeuHoy_WPF_Natif.Presentation
             _gestionPerceptron = new GestionPerceptron();
         }
 
+        /// <summary>
+        /// Permet d'exécuter les méthodes d'apprentissages de la classe gestionPerceptron
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Apprentissage(object sender, EventArgs e)
         {
             _gestionPerceptron.CollectTrainingData(_vue.aJoints, _vue.PositionEnCour);
@@ -35,6 +45,11 @@ namespace JeuHoy_WPF_Natif.Presentation
             _gestionPerceptron.Entrainement();
         }
 
+        /// <summary>
+        /// Permet d'exécuter la méthode de prédiction de la classe gestionPerceptron
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Predire(object sender, EventArgs e)
         {
             _gestionPerceptron.Prediction(_vue.PositionEnCour);
