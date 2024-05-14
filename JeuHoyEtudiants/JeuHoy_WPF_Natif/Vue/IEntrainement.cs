@@ -14,6 +14,7 @@ namespace JeuHoy_WPF_Natif.Vue
 
         int PositionEnCour { get; }
 
+        string Console { set; }
 
         // Méthode pour charger la figure de danse en cours
         void ChargerFigure();

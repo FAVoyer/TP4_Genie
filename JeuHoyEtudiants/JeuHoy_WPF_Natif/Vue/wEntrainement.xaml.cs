@@ -17,6 +17,9 @@ using System.Speech.Recognition;
 
 namespace JeuHoy_WPF
 {
+    /// <summary>
+    /// Enumeration des types d'affichage de la kinect
+    /// </summary>
     public enum DisplayFrameType
     {
         Infrared,
@@ -61,6 +64,8 @@ namespace JeuHoy_WPF
 
         #region Propriete
         public Joint[] aJoints { get; set; }
+
+        public string Console { set { txtConsole.Text = value; } }
 
 
         public int PositionEnCour { get { return _positionEnCours; } }

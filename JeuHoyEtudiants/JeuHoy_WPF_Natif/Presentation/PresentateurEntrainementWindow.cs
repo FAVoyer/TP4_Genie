@@ -43,16 +43,8 @@ namespace JeuHoy_WPF_Natif.Presentation
             _gestionPerceptron.CollectTrainingData(_vue.aJoints, _vue.PositionEnCour);
 
             _gestionPerceptron.Entrainement();
-        }
-
-        /// <summary>
-        /// Permet d'exécuter la méthode de prédiction de la classe gestionPerceptron
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Predire(object sender, EventArgs e)
-        {
-            _gestionPerceptron.Prediction(_vue.PositionEnCour);
+            
+            _vue.Console = _gestionPerceptron.Prediction(_vue.PositionEnCour).ToString();
         }
     }
 }
