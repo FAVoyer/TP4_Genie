@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Speech.Recognition;
+
+
 
 namespace JeuHoy_WPF
 {
@@ -20,7 +23,6 @@ namespace JeuHoy_WPF
         Color,
         Depth
     }
-
 
     /// <summary>
     /// Auteur:      Hugo St-Louis
@@ -33,6 +35,7 @@ namespace JeuHoy_WPF
         private const DisplayFrameType DEFAULT_DISPLAYFRAMETYPE = DisplayFrameType.Color;
         public static readonly double DPI = 96.0;
         public static readonly PixelFormat FORMAT = PixelFormats.Bgra32;
+        SpeechRecognitionEngine _recognizer;
 
         #endregion
 
@@ -72,6 +75,8 @@ namespace JeuHoy_WPF
             InitializeComponent();
             _kinectSensor = KinectSensor.GetDefault();
             _presentateur = new PresentateurEntrainementWindow(this);
+            _recognizer = new SpeechRecognitionEngine();
+
 
             if (_kinectSensor != null)
             {
@@ -97,6 +102,35 @@ namespace JeuHoy_WPF
             lblNbPositions.Content = "/ " + CstApplication.NBFIGURE.ToString();
             ChargerFigure();
             _son.JouerSonAsync(@"./HoyContent/hoy.wav");
+
+            Choices commands = new Choices();
+            commands.Add("HOY!");
+
+            GrammarBuilder gb = new GrammarBuilder();
+            gb.Append(commands);
+
+            Grammar grammar = new Grammar(gb);
+
+            _recognizer.LoadGrammar(grammar);
+
+            // Écouter les résultats de la reconnaissance vocale
+            _recognizer.SpeechRecognized += Recognizer_SpeechRecognized;
+
+            // Démarrer la reconnaissance vocale
+            _recognizer.SetInputToDefaultAudioDevice();
+            _recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+
+
+        }
+
+        private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            if (e.Result.Text == "HOY!")
+            {
+                _positionEnCours++;
+                ChargerFigure();
+            }
         }
 
         public void GetJoitsPos(Body body)
