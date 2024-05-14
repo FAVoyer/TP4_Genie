@@ -20,7 +20,6 @@ namespace JeuHoy_WPF_Natif.Presentation
     {
         private IEntrainement _vue;
         private GestionPerceptron _gestionPerceptron;
-        Dictionary<int, List<double>> trainingData = new Dictionary<int, List<double>>();
 
         public PresentateurEntrainementWindow(IEntrainement vue)
         {
@@ -33,9 +32,12 @@ namespace JeuHoy_WPF_Natif.Presentation
         {
             _gestionPerceptron.CollectTrainingData(_vue.aJoints, _vue.PositionEnCour);
 
-            _gestionPerceptron.Entrainement(trainingData);
+            _gestionPerceptron.Entrainement();
         }
 
-        
+        private void Predire(object sender, EventArgs e)
+        {
+            _gestionPerceptron.Prediction(_vue.PositionEnCour);
+        }
     }
 }

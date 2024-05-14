@@ -119,9 +119,6 @@ namespace JeuHoy_WPF
             // Démarrer la reconnaissance vocale
             _recognizer.SetInputToDefaultAudioDevice();
             _recognizer.RecognizeAsync(RecognizeMode.Multiple);
-
-
-
         }
 
         private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)

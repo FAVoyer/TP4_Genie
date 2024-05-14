@@ -1,9 +1,11 @@
-﻿using Microsoft.Kinect;
+﻿using JeuHoy_WPF_Natif.Presentation;
+using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace JeuHoy_WPF_Natif.Modele
 {
@@ -14,20 +16,36 @@ namespace JeuHoy_WPF_Natif.Modele
     /// </summary>
     public class GestionPerceptron : IGestionPerceptron
     {
-
         Dictionary<int, List<double>> trainingData = new Dictionary<int, List<double>>();
+        Dictionary<int, Perceptron> perceptrons = new Dictionary<int, Perceptron>();
+        Perceptron _perceptron = new Perceptron();
+
         /// <summary>
         /// Permet de charger les résultats d'apprentissage
         /// </summary>
         public void Charger()
         {
+            _perceptron.Charger("test.txt");
         }
 
         /// <summary>
         /// Permet d'entrainer le perceptron
         /// </summary>
-        public void Entrainement(Dictionary<int, List<double>> trainingData)
+        public void Entrainement()
         {
+            foreach(var entry in trainingData)
+            {
+                int target = entry.Key;
+                List<double> inputs = entry.Value;
+
+                if(!perceptrons.ContainsKey(target))
+                {
+                    int inputSize = inputs.Count;
+                    perceptrons[target] = new Perceptron(inputSize);
+                }
+
+                perceptrons[target].Entrainement(trainingData);
+            }
         }
 
         /// <summary>
@@ -35,9 +53,31 @@ namespace JeuHoy_WPF_Natif.Modele
         /// </summary>
         public void Sauvegarder()
         {
+            _perceptron.Sauvegarder("test.txt");
         }
 
-        public Dictionary<int, List<double>> CollectTrainingData(Joint[] joints,int position)
+        public int Prediction(int target)
+        {
+            List<double> input = trainingData[target];
+
+            if (perceptrons.ContainsKey(target))
+            {
+                return perceptrons[target].Prediction(input);
+            }
+            else
+            {
+                MessageBox.Show("Pas de perceptron entraîné pour le mouvement");
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Permet de mettre les positios des joints dans un dictionnaire
+        /// </summary>
+        /// <param name="joints"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public Dictionary<int, List<double>> CollectTrainingData(Joint[] joints, int position)
         {
             List<double> data = new List<double>();
 
